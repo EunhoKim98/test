@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Generate Google Dork</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f0f0f0;
+            margin: 0;
+            padding: 0;
+        }
+        h1 {
+            background-color: #333;
+            color: white;
+            padding: 20px;
+            margin: 0;
+        }
+        .container {
+            max-width: 800px;
+            margin: 20px auto;
+            padding: 20px;
+            background-color: white;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        }
+        form {
+            margin-bottom: 20px;
+        }
+        label {
+            display: block;
+            font-weight: bold;
+            margin-bottom: 5px;
+        }
+        input[type="text"] {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 10px;
+            border: 1px solid #ccc;
+            border-radius: 3px;
+        }
+        input[type="submit"] {
+            background-color: #333;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 3px;
+            cursor: pointer;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+        th, td {
+            padding: 10px;
+            border: 1px solid #ddd;
+            text-align: left;
+        }
+        th {
+            background-color: #f0f0f0;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+    <h1>Generate Google Dork</h1>
+    <div class="container">
+        <form method="POST">
+            <label for="url">URL:</label>
+            <input type="text" id="url" name="url"><br><br>
+            <label for="content">Content:</label>
+            <input type="text" id="content" name="content"><br><br>
+            <input type="submit" value="Generate Dork">
+        </form>
+
+        {% if dork_commands %}
+        <h2>Generated Dork Commands:</h2>
+        <table>
+            <tr>
+                <th>Command</th>
+                <th>Description</th>
+                <th>Result</th>
+            </tr>
+            {% for i in range(13) %}
+            <tr>
+                <td>{{ sub[i] }}</td>
+                <td>{{ des[i] }}</td>
+                <td>{{ dork_commands[i] }}</td>
+            </tr>
+            {% endfor %}
+        </table>
+        {% endif %}
+    </div>
+</body>
+</html>
