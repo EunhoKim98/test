@@ -47,6 +47,14 @@
             border-radius: 3px;
             cursor: pointer;
         }
+        input[type="Button"] {
+            background-color: #333;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 3px;
+            cursor: pointer;
+        }
         table {
             width: 100%;
             border-collapse: collapse;
@@ -64,33 +72,60 @@
     </style>
 </head>
 <body>
+    
+    <script>
+        function Search(){
+            var dork_command = '';
+            var q = '';
+            {% if dork_commands %}
+            {% for i in range(13) %}
+            var isChecked = document.getElementById("{{i|string}}");
+            if(isChecked && isChecked.checked){
+                q = q + "{{ dork_commands[i] }}";
+            }
+            {% endfor %}
+            {% endif %}
+            if(q !== ''){
+                dork_command = encodeURIComponent(q);
+                window.open("https://www.google.com/search?q=" + dork_command, "_blank");
+            }else{
+                alert("No checkboxes are selected!");
+            }
+        }
+    </script>
+    
+
     <h1>Generate Google Dork</h1>
     <div class="container">
         <form method="POST">
             <label for="url">URL:</label>
-            <input type="text" id="url" name="url"><br><br>
+            <input type="text" id="url" name="url" style="width:98%"><br><br>
             <label for="content">Content:</label>
-            <input type="text" id="content" name="content"><br><br>
-            <input type="submit" value="Generate Dork">
+            <input type="text" id="content" name="content" style="width:98%"><br><br>
+            <input type="submit" value="Generate Dork" style="float:left;margin-right:20px">
+            <input type="Button" value="Search for Google" onClick="Search()">
+
         </form>
 
         {% if dork_commands %}
         <h2>Generated Dork Commands:</h2>
         <table>
             <tr>
+                <th>Check</th>
                 <th>Command</th>
                 <th>Description</th>
                 <th>Result</th>
             </tr>
             {% for i in range(13) %}
             <tr>
+                <td style="text-align: center"><input type="checkbox" id="{{i|string }}"></td>
                 <td>{{ sub[i] }}</td>
                 <td>{{ des[i] }}</td>
                 <td>{{ dork_commands[i] }}</td>
             </tr>
             {% endfor %}
+            {% endif %}
         </table>
-        {% endif %}
     </div>
 </body>
 </html>
